@@ -1,13 +1,21 @@
 <template>
-  <div>
-    <h1>{{ home.title }}</h1>
+  <div class="home">
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
   </div>
 </template>
 
-<script lang="ts" setup>
-const home = reactive({
-  title: 'hello',
-})
-</script>
+<script lang="ts" setup></script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.home {
+  margin-top: $gutter * 2;
+  margin-left: $gutter * 2;
+  display: flex;
+  flex-wrap: wrap;
+}
+</style>
