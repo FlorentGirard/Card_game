@@ -1,36 +1,53 @@
 <template>
   <div class="card">
-    <h1 class="card__question">Question</h1>
-    <ul class="card__list">
-      <li class="card__itemList"><span>A) </span></li>
-      <li class="card__itemList"><span>B) </span></li>
-      <li class="card__itemList"><span>C) </span></li>
-      <li class="card__itemList"><span>D) </span></li>
-    </ul>
-    <footer class="card__footer">
-      <h2 class="card__response">Réponse:</h2>
-      <p class="card__explication">
-        <span class="card__explication--underline">Explications : </span>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad
-        commodi facilis id itaque, minus necessitatibus nihil nobis obcaecati,
-        odit officia provident quam quas quo soluta temporibus voluptatem!
-        Distinctio, tempora.
-      </p>
-    </footer>
+    <div class="card__content">
+      <h1 class="card__question">{{ props.card.question }}</h1>
+      <ul class="card__list">
+        <li
+          v-for="(item, index) in props.card.qcm"
+          :key="index"
+          class="card__itemList"
+        >
+          <span>{{ item }} </span>
+        </li>
+      </ul>
+      <footer class="card__footer">
+        <h2 class="card__response">Réponse: {{ props.card.answer }}</h2>
+        <p v-if="props.card.explication" class="card__explication">
+          <span class="card__explication--underline">Explications : </span>
+          {{ props.card.explication }}
+        </p>
+      </footer>
+    </div>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { PropType } from 'vue'
+import { QuestionType } from '~/types/type'
+
+const props = defineProps({
+  card: {
+    type: Object as PropType<QuestionType>,
+    required: true,
+  },
+})
+</script>
 
 <style scoped lang="scss">
 .card {
   width: 205px;
-  height: 322px;
-  border: 1px solid black;
+  height: 320px;
+  border: 0.4px solid black;
+
+  padding: $gutter;
+}
+
+.card__content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: $gutter * 0.5;
+  height: 100%;
 }
 
 .card__question {
@@ -51,9 +68,15 @@
   padding-bottom: $gutter * 3;
 }
 
+.card__response {
+  font-size: $fontSize * 1.2;
+}
+
 .card__explication {
+  font-size: $fontSize * 1.1;
   &--underline {
     text-decoration: underline;
+    font-weight: 700;
   }
 }
 </style>
