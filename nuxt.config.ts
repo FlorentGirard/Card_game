@@ -1,7 +1,6 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  ssr: false,
-  target: 'static',
+  ssr: true,
   css: ['@/assets/styles/main.scss'],
   vite: {
     css: {
@@ -12,5 +11,5 @@ export default defineNuxtConfig({
       },
     },
   },
-  modules: [],
+  modules: [['@pinia/nuxt', { autoImports: ['defineStore'] }]],
 })
